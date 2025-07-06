@@ -85,7 +85,7 @@ export default function KanbanBoard() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ status: newStatus, title: draggedTask.title, dueDate: draggedTask.dueDate, priority: draggedTask.priority, completed: draggedTask.completed }),
+        body: JSON.stringify({ status: newStatus, title: draggedTask.title, dueDate: draggedTask.dueDate ? new Date(draggedTask.dueDate) : null, priority: draggedTask.priority, completed: draggedTask.completed }),
       });
 
       if (!res.ok) {
