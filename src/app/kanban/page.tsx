@@ -115,11 +115,7 @@ export default function KanbanBoard() {
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="min-h-screen bg-blue-50 p-8">
         <h1 className="text-4xl font-bold text-blue-800 mb-8 text-center">Kanban Board</h1>
-        <div className="flex justify-center mb-8">
-          <Link href="/" className="px-5 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">
-            Back to Task List
-          </Link>
-        </div>
+        
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Not Started Column */}

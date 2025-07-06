@@ -101,11 +101,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-blue-50 flex flex-col items-center py-10">
       <h1 className="text-4xl font-bold text-blue-800 mb-8">Task Manager</h1>
-      <div className="mb-4">
-        <Link href="/kanban" className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
-          View Kanban Board
-        </Link>
-      </div>
+      
 
       <form onSubmit={handleAddTask} className="flex flex-col gap-4 mb-8 w-full max-w-md">
         <input

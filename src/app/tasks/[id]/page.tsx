@@ -160,12 +160,7 @@ export default function TaskDetailPage() {
           </button>
         </form>
 
-        <button
-          onClick={() => router.back()}
-          className="mt-6 px-5 py-3 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500"
-        >
-          Back to Task List
-        </button>
+        
       </div>
     </div>
   );
