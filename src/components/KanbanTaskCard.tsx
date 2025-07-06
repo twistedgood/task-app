@@ -39,7 +39,7 @@ export default function KanbanTaskCard({
       {...provided.dragHandleProps}
       className={`p-4 rounded-md shadow-sm ${snapshot.isDragging ? 'bg-blue-200' : 'bg-blue-100'}`}
     >
-      <Link href={`/tasks/${task.id}`} className="text-lg font-medium text-blue-800 hover:underline">
+      <Link href={`/tasks/${task.id}`} className="text-lg font-medium text-blue-800 hover:underline break-all">
         {task.title}
       </Link>
       {task.dueDate && (

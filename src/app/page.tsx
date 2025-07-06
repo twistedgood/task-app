@@ -63,24 +63,27 @@ export default function Home() {
     }
   };
 
-  const handleToggleComplete = async (id: string, completed: boolean) => {
+  const handleStatusChange = async (id: string, newStatus: Task['status']) => {
     try {
+      const taskToUpdate = tasks.find(task => task.id === id);
+      if (!taskToUpdate) return;
+
       const res = await fetch(`/api/tasks/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ completed: !completed }),
+        body: JSON.stringify({ ...taskToUpdate, status: newStatus }),
       });
       if (!res.ok) {
-        throw new Error('Failed to update task');
+        throw new Error('Failed to update task status');
       }
       const updatedTask: Task = await res.json();
       setTasks((prevTasks) =>
         prevTasks.map((task) => (task.id === id ? updatedTask : task))
       );
     } catch (error) {
-      console.error('Error toggling task completion:', error);
+      console.error('Error updating task status:', error);
     }
   };
 
@@ -152,7 +155,7 @@ export default function Home() {
             <TaskCard
               key={task.id}
               task={task}
-              onToggleComplete={handleToggleComplete}
+              onStatusChange={handleStatusChange}
               onDeleteTask={handleDeleteTask}
             />
           ))
