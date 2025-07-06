@@ -2,7 +2,7 @@
 'use client';
 
 import { useState, useEffect, FormEvent } from 'react';
-import Link from 'next/link';
+import TaskCard from '@/components/TaskCard';
 
 interface Task {
   id: string;
@@ -149,59 +149,12 @@ export default function Home() {
           <p className="text-center text-gray-500">No tasks yet. Add one above!</p>
         ) : (
           tasks.map((task) => (
-            <li
+            <TaskCard
               key={task.id}
-              className="flex flex-col sm:flex-row sm:items-center justify-between p-3 border-b border-blue-100 last:border-b-0"
-            >
-              <div className="flex flex-col">
-                <span
-                  className={`text-lg ${task.completed ? 'line-through text-gray-400' : 'text-blue-700'}`}
-                >
-                  <Link href={`/tasks/${task.id}`} className="hover:underline">
-                    {task.title}
-                  </Link>
-                </span>
-                {task.dueDate && (
-                  <span className="text-sm text-gray-500 mt-1">
-                    Due: {new Date(task.dueDate).toLocaleDateString()}
-                  </span>
-                )}
-                {task.priority !== undefined && (
-                  <span className="text-sm text-gray-500 mt-1">
-                    Priority: {
-                      task.priority === 0 ? 'Low' :
-                      task.priority === 1 ? 'Medium' :
-                      task.priority === 2 ? 'High' :
-                      'N/A'
-                    }
-                  </span>
-                )}
-                <span className="text-sm text-gray-500 mt-1">
-                  Status: {
-                    task.status === 'NOT_STARTED' ? 'Not Started' :
-                    task.status === 'IN_PROGRESS' ? 'In Progress' :
-                    task.status === 'COMPLETED' ? 'Completed' :
-                    'N/A'
-                  }
-                </span>
-              </div>
-              <div className="flex gap-2 mt-2 sm:mt-0">
-                <button
-                  onClick={() => handleToggleComplete(task.id, task.completed)}
-                  className={`px-3 py-1 rounded-md text-white text-sm ${
-                    task.completed ? 'bg-yellow-400 hover:bg-yellow-500' : 'bg-green-500 hover:bg-green-600'
-                  }`}
-                >
-                  {task.completed ? 'Undo' : 'Complete'}
-                </button>
-                <button
-                  onClick={() => handleDeleteTask(task.id)}
-                  className="px-3 py-1 bg-red-400 text-white rounded-md hover:bg-red-500 text-sm"
-                >
-                  Delete
-                </button>
-              </div>
-            </li>
+              task={task}
+              onToggleComplete={handleToggleComplete}
+              onDeleteTask={handleDeleteTask}
+            />
           ))
         )}
       </ul>

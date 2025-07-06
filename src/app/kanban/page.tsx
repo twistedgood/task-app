@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd';
+import KanbanTaskCard from '@/components/KanbanTaskCard';
 
 interface Task {
   id: string;
@@ -133,23 +134,8 @@ export default function KanbanBoard() {
                   ) : (
                     getTasksByStatus('NOT_STARTED').map((task, index) => (
                       <Draggable key={task.id} draggableId={task.id} index={index}>
-                        {(provided) => (
-                          <div
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            className="bg-blue-100 p-4 rounded-md shadow-sm"
-                          >
-                            <Link href={`/tasks/${task.id}`} className="text-lg font-medium text-blue-800 hover:underline">
-                              {task.title}
-                            </Link>
-                            {task.dueDate && (
-                              <p className="text-sm text-gray-600">Due: {new Date(task.dueDate).toLocaleDateString()}</p>
-                            )}
-                            {task.priority !== undefined && (
-                              <p className="text-sm text-gray-600">Priority: {getPriorityLabel(task.priority)}</p>
-                            )}
-                          </div>
+                        {(provided, snapshot) => (
+                          <KanbanTaskCard task={task} provided={provided} snapshot={snapshot} />
                         )}
                       </Draggable>
                     ))
@@ -175,23 +161,8 @@ export default function KanbanBoard() {
                   ) : (
                     getTasksByStatus('IN_PROGRESS').map((task, index) => (
                       <Draggable key={task.id} draggableId={task.id} index={index}>
-                        {(provided) => (
-                          <div
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            className="bg-yellow-100 p-4 rounded-md shadow-sm"
-                          >
-                            <Link href={`/tasks/${task.id}`} className="text-lg font-medium text-blue-800 hover:underline">
-                              {task.title}
-                            </Link>
-                            {task.dueDate && (
-                              <p className="text-sm text-gray-600">Due: {new Date(task.dueDate).toLocaleDateString()}</p>
-                            )}
-                            {task.priority !== undefined && (
-                              <p className="text-sm text-gray-600">Priority: {getPriorityLabel(task.priority)}</p>
-                            )}
-                          </div>
+                        {(provided, snapshot) => (
+                          <KanbanTaskCard task={task} provided={provided} snapshot={snapshot} />
                         )}
                       </Draggable>
                     ))
@@ -217,23 +188,8 @@ export default function KanbanBoard() {
                   ) : (
                     getTasksByStatus('COMPLETED').map((task, index) => (
                       <Draggable key={task.id} draggableId={task.id} index={index}>
-                        {(provided) => (
-                          <div
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            className="bg-green-100 p-4 rounded-md shadow-sm"
-                          >
-                            <Link href={`/tasks/${task.id}`} className="text-lg font-medium text-blue-800 hover:underline">
-                              {task.title}
-                            </Link>
-                            {task.dueDate && (
-                              <p className="text-sm text-gray-600">Due: {new Date(task.dueDate).toLocaleDateString()}</p>
-                            )}
-                            {task.priority !== undefined && (
-                              <p className="text-sm text-gray-600">Priority: {getPriorityLabel(task.priority)}</p>
-                            )}
-                          </div>
+                        {(provided, snapshot) => (
+                          <KanbanTaskCard task={task} provided={provided} snapshot={snapshot} />
                         )}
                       </Draggable>
                     ))
